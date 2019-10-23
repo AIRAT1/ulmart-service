@@ -25,6 +25,12 @@ public class Main {
         System.out.println(service.searchByCategory("tv"));
         List<Product> test = service.getRepository().getAll();
         List<Product> sorted = service.getAlphabeticallySortedByName(false);
+        List<Product> sortedByPrice = service.getSortedByPrice();
+        List<Product> sortedByName = service.getAlphabeticallySortedByName();
+        List<Product> sortedByPriceWithDirection = service.getSortedByPrice(1);
+        sortedByPrice.forEach(System.out::println);
+        sortedByName.forEach(System.out::println);
+        sortedByPriceWithDirection.forEach(System.out::println);
         test.forEach(System.out::println);
         System.out.println(service.deleteById(2, sorted));
         sorted.forEach(System.out::println);

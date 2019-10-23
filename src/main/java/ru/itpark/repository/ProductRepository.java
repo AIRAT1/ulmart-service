@@ -3,7 +3,6 @@ package ru.itpark.repository;
 import ru.itpark.model.Product;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class ProductRepository {
