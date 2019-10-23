@@ -21,7 +21,7 @@ public class ProductService {
 
     public void add(Product item) {
         if (item.getId() != 0) {
-            throw new IllegalArgumentException(("id must be zero!"));
+            throw new IllegalArgumentException("id must be zero!");
         }
         if (item.getPrice() <= 0) {
             throw new IllegalArgumentException("price must be greater as zero");
@@ -56,7 +56,7 @@ public class ProductService {
 
     public List<Product> getSortedByPrice() {
         List<Product> result = new ArrayList<>(repository.getAll());
-        result.sort((o1, o2) -> (o2.getPrice() - o1.getPrice()));
+        result.sort((o1, o2) -> o2.getPrice() - o1.getPrice());
         return result;
     }
 
@@ -96,7 +96,7 @@ public class ProductService {
         }
         int countOfPages = products.size() / countPerPage;
         List<List<Product>> subLists = new ArrayList<>(countOfPages);
-        for (int i = 0; i < countOfPages; i++) {
+        for (long i = 0; i < countOfPages; i++) {
             subLists.add(products.stream().skip(i * countPerPage).limit(countPerPage).collect(Collectors.toList()));
         }
         System.out.println(nextQueryId);

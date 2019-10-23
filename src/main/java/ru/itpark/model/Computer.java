@@ -5,7 +5,7 @@ public class Computer extends Product {
     private int RAMSize;
     private OperationSystemType operationSystemType;
 
-    public Computer(long id, String name, int price, CPUType cpuType, int RAMSize, OperationSystemType operationSystemType) {
+    public Computer(int id, String name, int price, CPUType cpuType, int RAMSize, OperationSystemType operationSystemType) {
         super(id, name, price);
         this.cpuType = cpuType;
         this.RAMSize = RAMSize;
