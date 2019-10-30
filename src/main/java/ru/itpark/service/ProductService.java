@@ -1,5 +1,6 @@
 package ru.itpark.service;
 
+import org.jetbrains.annotations.NotNull;
 import ru.itpark.model.Product;
 import ru.itpark.repository.ProductRepository;
 
@@ -87,7 +88,7 @@ public class ProductService {
         return result;
     }
 
-    public List<Product> pagingListItems(List<Product> products, int countPerPage, int pageNumber) {
+    public List<Product> pagingListItems(@NotNull List<Product> products, int countPerPage, int pageNumber) {
         int countOfPages = products.size() / countPerPage;
         List<List<Product>> subLists = new ArrayList<>(1);
         subLists.add(products.stream().skip(Math.min(pageNumber - 1, countOfPages - 1) * countPerPage).limit(countPerPage).collect(Collectors.toList()));
