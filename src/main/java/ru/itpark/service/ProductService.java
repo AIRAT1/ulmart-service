@@ -99,7 +99,6 @@ public class ProductService {
         for (long i = 0; i < countOfPages; i++) {
             subLists.add(products.stream().skip(i * countPerPage).limit(countPerPage).collect(Collectors.toList()));
         }
-        System.out.println(nextQueryId);
         return subLists.get(Math.min(nextQueryId++, countOfPages - 1));
     }
 }
