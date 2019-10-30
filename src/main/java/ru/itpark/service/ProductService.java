@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 
 public class ProductService {
     private final ProductRepository repository;
-    private int nextQueryId = 0;
 
     public ProductService(ProductRepository repository) {
         this.repository = repository;
