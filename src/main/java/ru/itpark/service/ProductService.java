@@ -89,8 +89,8 @@ public class ProductService {
 
     public List<Product> pagingListItems(List<Product> products, int countPerPage, int pageNumber) {
         int countOfPages = products.size() / countPerPage;
-        List<List<Product>> subLists = new ArrayList<>(countOfPages);
-        subLists.add(products.stream().skip(Math.min(pageNumber - 1, countOfPages) * countPerPage).limit(countPerPage).collect(Collectors.toList()));
+        List<List<Product>> subLists = new ArrayList<>(1);
+        subLists.add(products.stream().skip(Math.min(pageNumber - 1, countOfPages - 1) * countPerPage).limit(countPerPage).collect(Collectors.toList()));
         return subLists.get(0);
     }
 }

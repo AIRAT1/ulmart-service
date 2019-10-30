@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ProductRepository {
     private final List<Product> products = new ArrayList<>();
-    private long nextId = 1;
+    private int nextId = 1;
 
     public void save (Product item) {
         if (item.getId() == 0) {
