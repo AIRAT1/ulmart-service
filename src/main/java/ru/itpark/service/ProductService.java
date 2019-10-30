@@ -29,23 +29,23 @@ public class ProductService {
         repository.save(item);
     }
 
-    private void AlphabeticallySortByName(List<Product> result) {
+    private void alphabeticallySortByName(List<Product> result) {
         result.sort(Comparator.comparing(Product::getName));
     }
 
-    private void ReverseSortByName(List<Product> result) {
+    private void reverseSortByName(List<Product> result) {
         result.sort(Comparator.comparing(Product::getName).reversed());
     }
 
     public List<Product> searchByName(String name) {
         List<Product> result = repository.getAll().stream().filter(x -> name.equalsIgnoreCase(x.getName())).collect(Collectors.toList());
-        AlphabeticallySortByName(result);
+        alphabeticallySortByName(result);
         return result;
     }
 
     public List<Product> searchByCategory(String className) {
         List<Product> result = repository.getAll().stream().filter(x -> className.equalsIgnoreCase(x.getClass().getSimpleName())).collect(Collectors.toList());
-        AlphabeticallySortByName(result);
+        alphabeticallySortByName(result);
         return result;
     }
 
@@ -77,16 +77,16 @@ public class ProductService {
     public List<Product> getAlphabeticallySortedByName(boolean direction) {
         List<Product> result = new ArrayList<>(repository.getAll());
         if (direction) {
-            AlphabeticallySortByName(result);
+            alphabeticallySortByName(result);
         } else {
-            ReverseSortByName(result);
+            reverseSortByName(result);
         }
         return result;
     }
 
     public List<Product> getAlphabeticallySortedByName() {
         List<Product> result = new ArrayList<>(repository.getAll());
-        AlphabeticallySortByName(result);
+        alphabeticallySortByName(result);
         return result;
     }
 
