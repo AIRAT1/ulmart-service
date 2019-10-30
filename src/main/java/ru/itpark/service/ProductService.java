@@ -4,7 +4,6 @@ import ru.itpark.model.Product;
 import ru.itpark.repository.ProductRepository;
 
 import java.util.*;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class ProductService {
@@ -15,8 +14,8 @@ public class ProductService {
         this.repository = repository;
     }
 
-    public ProductRepository getRepository() {
-        return repository;
+    public List<Product> getAll() {
+        return repository.getAll();
     }
 
     public void add(Product item) {
@@ -29,29 +28,28 @@ public class ProductService {
         repository.save(item);
     }
 
-    private void AlphabeticallySortByName(List<Product> result) {
+    private void alphabeticallySortByName(List<Product> result) {
         result.sort(Comparator.comparing(Product::getName));
     }
 
-    private void ReverseSortByName(List<Product> result) {
+    private void reverseSortByName(List<Product> result) {
         result.sort(Comparator.comparing(Product::getName).reversed());
     }
 
     public List<Product> searchByName(String name) {
         List<Product> result = repository.getAll().stream().filter(x -> name.equalsIgnoreCase(x.getName())).collect(Collectors.toList());
-        AlphabeticallySortByName(result);
+        alphabeticallySortByName(result);
         return result;
     }
 
     public List<Product> searchByCategory(String className) {
         List<Product> result = repository.getAll().stream().filter(x -> className.equalsIgnoreCase(x.getClass().getSimpleName())).collect(Collectors.toList());
-        AlphabeticallySortByName(result);
+        alphabeticallySortByName(result);
         return result;
     }
 
     public boolean deleteById(int id, List<Product> products) {
-        Predicate<Product> condition = x -> x.getId() == id;
-        return products.removeIf(condition);
+        return products.removeIf(x -> x.getId() == id);
     }
 
     public List<Product> getSortedByPrice() {
@@ -77,29 +75,23 @@ public class ProductService {
     public List<Product> getAlphabeticallySortedByName(boolean direction) {
         List<Product> result = new ArrayList<>(repository.getAll());
         if (direction) {
-            AlphabeticallySortByName(result);
+            alphabeticallySortByName(result);
         } else {
-            ReverseSortByName(result);
+            reverseSortByName(result);
         }
         return result;
     }
 
     public List<Product> getAlphabeticallySortedByName() {
         List<Product> result = new ArrayList<>(repository.getAll());
-        AlphabeticallySortByName(result);
+        alphabeticallySortByName(result);
         return result;
     }
 
-    public List<Product> pagingListItems(List<Product> products, int countPerPage) {
-        if (products.size() <= countPerPage) {
-            return products;
-        }
+    public List<Product> pagingListItems(List<Product> products, int countPerPage, int pageNumber) {
         int countOfPages = products.size() / countPerPage;
         List<List<Product>> subLists = new ArrayList<>(countOfPages);
-        for (long i = 0; i < countOfPages; i++) {
-            subLists.add(products.stream().skip(i * countPerPage).limit(countPerPage).collect(Collectors.toList()));
-        }
-        System.out.println(nextQueryId);
-        return subLists.get(Math.min(nextQueryId++, countOfPages - 1));
+        subLists.add(products.stream().skip(Math.min(pageNumber - 1, countOfPages) * countPerPage).limit(countPerPage).collect(Collectors.toList()));
+        return subLists.get(0);
     }
 }
