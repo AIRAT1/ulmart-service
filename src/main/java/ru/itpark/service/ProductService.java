@@ -4,7 +4,6 @@ import ru.itpark.model.Product;
 import ru.itpark.repository.ProductRepository;
 
 import java.util.*;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class ProductService {
@@ -89,15 +88,10 @@ public class ProductService {
         return result;
     }
 
-    public List<Product> pagingListItems(List<Product> products, int countPerPage) {
-        if (products.size() <= countPerPage) {
-            return products;
-        }
+    public List<Product> pagingListItems(List<Product> products, int countPerPage, int pageNumber) {
         int countOfPages = products.size() / countPerPage;
         List<List<Product>> subLists = new ArrayList<>(countOfPages);
-        for (long i = 0; i < countOfPages; i++) {
-            subLists.add(products.stream().skip(i * countPerPage).limit(countPerPage).collect(Collectors.toList()));
-        }
-        return subLists.get(Math.min(nextQueryId++, countOfPages - 1));
+        subLists.add(products.stream().skip(Math.min(pageNumber - 1, countOfPages) * countPerPage).limit(countPerPage).collect(Collectors.toList()));
+        return subLists.get(0);
     }
 }

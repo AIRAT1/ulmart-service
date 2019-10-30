@@ -21,23 +21,23 @@ public class Main {
         service.add(new TV(0, "Hitachi", 350, 51, TV.Color.WHITE, TV.DigitalTelevisionStandard.DVB_T2));
         service.add(new TV(0, "Sony", 850, 72, TV.Color.BLACK, TV.DigitalTelevisionStandard.DVB_S));
 
-        System.out.println(service.searchByName("IPHONE"));
-        System.out.println(service.searchByCategory("tv"));
+//        System.out.println(service.searchByName("IPHONE"));
+//        System.out.println(service.searchByCategory("tv"));
         List<Product> test = service.getAll();
-        List<Product> sorted = service.getAlphabeticallySortedByName(false);
-        List<Product> sortedByPrice = service.getSortedByPrice();
-        List<Product> sortedByName = service.getAlphabeticallySortedByName();
-        List<Product> sortedByPriceWithDirection = service.getSortedByPrice(1);
-        sortedByPrice.forEach(System.out::println);
-        sortedByName.forEach(System.out::println);
-        sortedByPriceWithDirection.forEach(System.out::println);
-        test.forEach(System.out::println);
-        System.out.println(service.deleteById(2, sorted));
-        sorted.forEach(System.out::println);
-        System.out.println(service.pagingListItems(test, 5));
-        System.out.println(service.pagingListItems(test, 5));
-        System.out.println(service.pagingListItems(test, 5));
-        System.out.println(service.pagingListItems(test, 5));
-        System.out.println(service.pagingListItems(test, 5));
+//        List<Product> sorted = service.getAlphabeticallySortedByName(false);
+//        List<Product> sortedByPrice = service.getSortedByPrice();
+//        List<Product> sortedByName = service.getAlphabeticallySortedByName();
+//        List<Product> sortedByPriceWithDirection = service.getSortedByPrice(1);
+//        sortedByPrice.forEach(System.out::println);
+//        sortedByName.forEach(System.out::println);
+//        sortedByPriceWithDirection.forEach(System.out::println);
+//        test.forEach(System.out::println);
+//        System.out.println(service.deleteById(2, sorted));
+//        sorted.forEach(System.out::println);
+        System.out.println(service.pagingListItems(test, 5, 1));
+        System.out.println(service.pagingListItems(test, 5, 2));
+        System.out.println(service.pagingListItems(test, 5, 3));
+        System.out.println(service.pagingListItems(test, 5, 4));
+        System.out.println(service.pagingListItems(test, 5, 5));
     }
 }
