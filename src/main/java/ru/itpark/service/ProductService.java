@@ -50,8 +50,7 @@ public class ProductService {
     }
 
     public boolean deleteById(int id, List<Product> products) {
-        Predicate<Product> condition = x -> x.getId() == id;
-        return products.removeIf(condition);
+        return products.removeIf(x -> x.getId() == id);
     }
 
     public List<Product> getSortedByPrice() {
