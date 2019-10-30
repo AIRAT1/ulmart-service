@@ -23,7 +23,7 @@ public class Main {
 
         System.out.println(service.searchByName("IPHONE"));
         System.out.println(service.searchByCategory("tv"));
-        List<Product> test = service.getRepository().getAll();
+        List<Product> test = service.getAll();
         List<Product> sorted = service.getAlphabeticallySortedByName(false);
         List<Product> sortedByPrice = service.getSortedByPrice();
         List<Product> sortedByName = service.getAlphabeticallySortedByName();

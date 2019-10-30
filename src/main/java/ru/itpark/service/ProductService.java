@@ -15,8 +15,8 @@ public class ProductService {
         this.repository = repository;
     }
 
-    public ProductRepository getRepository() {
-        return repository;
+    public List<Product> getAll() {
+        return repository.getAll();
     }
 
     public void add(Product item) {
